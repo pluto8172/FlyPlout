@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/bean/celebrity_entity.dart' as celebrity;
 import 'package:flutter_fly_plout/bean/celebrity_work_entity.dart';
 import 'package:flutter_fly_plout/bean/comments_entity.dart';
@@ -9,10 +10,26 @@ import 'package:flutter_fly_plout/bean/search_result_entity.dart';
 import 'package:flutter_fly_plout/bean/subject_entity.dart';
 import 'package:flutter_fly_plout/http/http_request.dart';
 import 'package:flutter_fly_plout/utils/palette_generator.dart';
-import 'package:flutter/material.dart';
 typedef RequestCallBack<T> = void Function(T value);
 
 class API {
+
+  static API _INSTANCE;
+
+  API._internal(){}
+
+  factory API(){
+    return _get();
+  }
+  static _get(){
+    if(_INSTANCE == null){
+      _INSTANCE =  API._internal();
+    }
+    return _INSTANCE;
+  }
+
+
+
   static const BASE_URL = 'https://api.douban.com';
 
   ///TOP250
@@ -164,4 +181,6 @@ class API {
     MovieLongCommentReviews bean = MovieLongCommentReviews.fromJson(result);
     requestCallBack(bean);
   }
+
+
 }

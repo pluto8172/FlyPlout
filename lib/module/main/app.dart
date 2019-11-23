@@ -9,11 +9,11 @@ import 'package:flutter_fly_plout/module/video/page.dart';
 Widget createApp() {
   final AbstractRoutes routes = PageRoutes(
     pages: <String, Page<Object, dynamic>>{
-      'splash_apge':SplashPage(),
-      'home_apge':HomePage(),
-      'mine_apge':MinePage(),
-      'video_apge':VideoPage(),
-      'collection_apge':CollectionPage(),
+      'splash_page':SplashPage(),
+      'home_page':HomePage(),
+      'mine_page':MinePage(),
+      'video_page':VideoPage(),
+      'collection_page':CollectionPage(),
 
     },
   );
@@ -24,7 +24,7 @@ Widget createApp() {
       primarySwatch: Colors.blue,
     ),
 
-    home: routes.buildPage('splash_apge', null),  //把他作为默认页面
+    home: routes.buildPage('splash_page', null),  //把他作为默认页面
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);

@@ -82,7 +82,7 @@ class MinePage2 extends StatelessWidget {
             _divider(),
             _personItem('ic_me_journal.png', '我的发布',onTab: (){
               //Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionPage),);
-              Navigator.pushNamed(context, "collection_apge", arguments: null);
+              Navigator.pushNamed(context, "collection_page", arguments: null);
 
               // 点击事件
               //dispatch(MineActionCreator.onOpenCollectionAction());
