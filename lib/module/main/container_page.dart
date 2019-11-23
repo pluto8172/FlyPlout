@@ -1,4 +1,5 @@
 
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/module/home/home_page.dart';
@@ -48,7 +49,7 @@ class _ContainerPageState extends State<ContainerPage> {
         //BookAudioVideoPage(),
         //GroupPage(),
         //shopPageWidget,
-        MinePage()
+        MinePage2()
       ];
     }
     if (itemList == null) {

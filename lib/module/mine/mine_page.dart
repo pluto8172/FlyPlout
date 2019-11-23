@@ -1,15 +1,19 @@
+import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_fly_plout/constant/cache_key.dart';
 import 'package:flutter_fly_plout/constant/constant.dart';
+import 'package:flutter_fly_plout/module/collection/page.dart';
 import 'package:flutter_fly_plout/module/main//main.dart';
+import 'package:flutter_fly_plout/module/mine/action.dart';
 import 'package:flutter_fly_plout/widgets/image/heart_img_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 typedef VoidCallback = void Function();
 
 ///个人中心
-class MinePage extends StatelessWidget {
+class MinePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('build PersonCenterPage');
@@ -76,7 +80,15 @@ class MinePage extends StatelessWidget {
             _divider(),
             _dataSelect(),
             _divider(),
-            _personItem('ic_me_journal.png', '我的发布'),
+            _personItem('ic_me_journal.png', '我的发布',onTab: (){
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => CollectionPage),);
+              Navigator.pushNamed(context, "collection_apge", arguments: null);
+
+              // 点击事件
+              //dispatch(MineActionCreator.onOpenCollectionAction());
+
+            }),
+
             _personItem('ic_me_follows.png', '我的关注'),
             _personItem('ic_me_photo_album.png', '相册'),
             _personItem('ic_me_doulist.png', '豆列 / 收藏'),
@@ -104,8 +116,7 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter _personItem(String imgAsset, String title,
-      {VoidCallback onTab}) {
+  SliverToBoxAdapter _personItem(String imgAsset, String title, {VoidCallback onTab}) {
     return SliverToBoxAdapter(
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
