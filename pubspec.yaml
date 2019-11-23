@@ -37,6 +37,8 @@ dependencies:
 
   cached_network_image: ^1.1.0
 
+  fish_redux: ^0.3.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
