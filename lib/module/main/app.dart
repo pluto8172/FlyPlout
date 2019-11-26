@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/module/collection/page.dart';
 import 'package:flutter_fly_plout/module/home/page.dart';
+import 'package:flutter_fly_plout/module/login/page.dart';
 import 'package:flutter_fly_plout/module/mine/page.dart';
 import 'package:flutter_fly_plout/module/splash/page.dart';
 import 'package:flutter_fly_plout/module/video/page.dart';
@@ -14,6 +15,7 @@ Widget createApp() {
       'mine_page':MinePage(),
       'video_page':VideoPage(),
       'collection_page':CollectionPage(),
+      'login_page':LoginPage(),
 
     },
   );

@@ -40,13 +40,6 @@ DefaultTabController getWidget() {
         // These are the slivers that show up in the "outer" scroll view.
         return <Widget>[
           SliverOverlapAbsorber(
-            // This widget takes the overlapping behavior of the SliverAppBar,
-            // and redirects it to the SliverOverlapInjector below. If it is
-            // missing, then it is possible for the nested "inner" scroll view
-            // below to end up under the SliverAppBar even when the inner
-            // scroll view thinks it has not been scrolled.
-            // This is not necessary if the "headerSliverBuilder" only builds
-            // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             child: myapp.SliverAppBar(
               pinned: true,
@@ -68,14 +61,6 @@ DefaultTabController getWidget() {
                   alignment: Alignment(0.0, 0.0),
                 ),
               ),
-              // The "forceElevated" property causes the SliverAppBar to show
-              // a shadow. The "innerBoxIsScrolled" parameter is true when the
-              // inner scroll view is scrolled beyond its "zero" point, i.e.
-              // when it appears to be scrolled below the SliverAppBar.
-              // Without this, there are cases where the shadow would appear
-              // or not appear inappropriately, because the SliverAppBar is
-              // not actually aware of the precise position of the inner
-              // scroll views.
               bottomTextString: _tabs,
               bottom: TabBar(
                 // These are the widgets to put in each tab in the tab bar.
@@ -133,10 +118,6 @@ class _SliverContainerState extends State<SliverContainer> {
   List<Subject> list;
 
   void requestAPI() async {
-//    var _request = HttpRequest(API.BASE_URL);
-//    int start = math.Random().nextInt(220);
-//    final Map result = await _request.get(API.TOP_250 + '?start=$start&count=30');
-//    var resultList = result['subjects'];
 
     var _request = MockRequest();
     var result = await _request.get(API.TOP_250);
@@ -169,24 +150,13 @@ class _SliverContainerState extends State<SliverContainer> {
         builder: (BuildContext context) {
           return CustomScrollView(
             physics: const BouncingScrollPhysics(),
-            // The "controller" and "primary" members should be left
-            // unset, so that the NestedScrollView can control this
-            // inner scroll view.
-            // If the "controller" property is set, then this scroll
-            // view will not be associated with the NestedScrollView.
-            // The PageStorageKey should be unique to this ScrollView;
-            // it allows the list to remember its scroll position when
-            // the tab view is not on the screen.
             key: PageStorageKey<String>(widget.name),
             slivers: <Widget>[
               SliverOverlapInjector(
-                // This is the flip side of the SliverOverlapAbsorber above.
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               ),
               SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      ((BuildContext context, int index) {
+                  delegate: SliverChildBuilderDelegate(((BuildContext context, int index) {
                 return getCommonItem(list, index);
               }), childCount: list.length)),
             ],
@@ -202,7 +172,7 @@ class _SliverContainerState extends State<SliverContainer> {
   ///列表的普通单个item
   getCommonItem(List<Subject> items, int index) {
     Subject item = items[index];
-    bool showVideo = index == 1 || index == 3;
+    bool showVideo = index == 1 || index == 3; // 1 ，3 位置显示视频
     return Container(
       height: showVideo ? contentVideoHeight : singleLineImgHeight,
       color: Colors.white,
@@ -217,16 +187,16 @@ class _SliverContainerState extends State<SliverContainer> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CircleAvatar(
+              CircleAvatar(  // 圆形头像
                 radius: 25.0,
                 backgroundImage: NetworkImage(item.casts[0].avatars.medium),
                 backgroundColor: Colors.white,
               ),
-              Padding(
+              Padding( //名称
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text(item.title),
               ),
-              Expanded(
+              Expanded(  // 更多
                 child: Align(
                   child: Icon(
                     Icons.more_horiz,
@@ -247,14 +217,13 @@ class _SliverContainerState extends State<SliverContainer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Image.asset(
+                Image.asset( //点赞
                   Constant.ASSETS_IMG + 'ic_vote.png',
                   width: 25.0,
                   height: 25.0,
                 ),
                 Image.asset(
-                  Constant.ASSETS_IMG +
-                      'ic_notification_tv_calendar_comments.png',
+                  Constant.ASSETS_IMG + 'ic_notification_tv_calendar_comments.png',
                   width: 20.0,
                   height: 20.0,
                 ),
@@ -331,8 +300,7 @@ _loginContainer(BuildContext context) {
               '去登录',
               style: TextStyle(fontSize: 16.0, color: Colors.green),
             ),
-            padding: const EdgeInsets.only(
-                left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
+            padding: const EdgeInsets.only(left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.green),
                 borderRadius: const BorderRadius.all(Radius.circular(6.0))),

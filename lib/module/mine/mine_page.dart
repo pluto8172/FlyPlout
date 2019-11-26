@@ -94,6 +94,9 @@ class MinePage2 extends StatelessWidget {
             _personItem('ic_me_doulist.png', '豆列 / 收藏'),
             _divider(),
             _personItem('ic_me_wallet.png', '钱包'),
+            _personItem('ic_me_wallet.png', '设置', onTab: (){
+              Navigator.pushNamed(context, "login_page", arguments: null);
+            }),
           ],
         ),
       )),

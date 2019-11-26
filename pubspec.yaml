@@ -30,14 +30,19 @@ dependencies:
   fluttertoast: ^3.0.4
 
   video_player: 0.10.0+2
+
     # 用来模拟网络返回的数据，这些数据是真实的，这里模拟
-  dio: ^1.0.13
+  dio: ^3.0.7
 
   http: ^0.12.0+2
 
   cached_network_image: ^1.1.0
 
   fish_redux: ^0.3.1
+
+  json_serializable: ^3.0.0
+
+
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,3 @@
+class BaseResponse extends Function{
+
+}
