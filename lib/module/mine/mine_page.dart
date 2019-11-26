@@ -1,13 +1,8 @@
-import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter_fly_plout/constant/cache_key.dart';
-import 'package:flutter_fly_plout/constant/constant.dart';
-import 'package:flutter_fly_plout/module/collection/page.dart';
-import 'package:flutter_fly_plout/module/main//main.dart';
-import 'package:flutter_fly_plout/module/mine/action.dart';
-import 'package:flutter_fly_plout/widgets/image/heart_img_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_fly_plout/constant/cache_key.dart';
+import 'package:flutter_fly_plout/constant/constant.dart';
+import 'package:flutter_fly_plout/widgets/image/heart_img_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 typedef VoidCallback = void Function();
@@ -220,7 +215,7 @@ class _UseNetDataWidgetState extends State<UseNetDataWidget> {
                           FlatButton(
                             child: Text('现在重启'),
                             onPressed: () {
-                              RestartWidget.restartApp(context);
+                              //RestartWidget.restartApp(context);
                               Navigator.of(context).pop();
                             },
                           )

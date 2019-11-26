@@ -64,8 +64,7 @@ class _ContainerPageState extends State<ContainerPage> {
                 item.name,
                 style: TextStyle(fontSize: 10.0),
               ),
-              activeIcon:
-                  Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
+              activeIcon: Image.asset(item.activeIcon, width: 30.0, height: 30.0)))
           .toList();
     }
   }

@@ -51,9 +51,7 @@ class _LoginPageState extends State<LoginWidget>{
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "登录",
-      home: new Scaffold(
+    return new Scaffold(
         appBar: new AppBar(
           title: new Text("登录"),
         ),
@@ -72,10 +70,10 @@ class _LoginPageState extends State<LoginWidget>{
                       decoration: new InputDecoration(
                         labelText: "请输入用户名",
                       ),
-                      onSaved: (value){
+                      onSaved: (value) {
                         userName = value;
                       },
-                      onFieldSubmitted: (value){
+                      onFieldSubmitted: (value) {
 
                       },
                     ),
@@ -85,16 +83,16 @@ class _LoginPageState extends State<LoginWidget>{
                           labelText: "请输入密码"
                       ),
 
-                      onSaved: (value){
+                      onSaved: (value) {
                         password = value;
                       },
 
                       obscureText: true,
-                      validator: (value){
-                        return value.length<6 ?"密码长度不够6位" : null;
+                      validator: (value) {
+                        return value.length < 6 ? "密码长度不够6位" : null;
                       },
 
-                      onFieldSubmitted: (value){
+                      onFieldSubmitted: (value) {
 
                       },
                     )
@@ -108,16 +106,15 @@ class _LoginPageState extends State<LoginWidget>{
               width: 340.0,
               height: 42.0,
               child: new RaisedButton(
-                  onPressed: login,
-                  child: new Text(
-                    "登录",
-                    style: TextStyle(fontSize: 18.0),
-                  ),
+                onPressed: login,
+                child: new Text(
+                  "登录",
+                  style: TextStyle(fontSize: 18.0),
+                ),
               ),
             )
           ],
         )
-      ),
     );
   }
 

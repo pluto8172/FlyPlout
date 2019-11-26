@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/constant/constant.dart';
 import 'package:flutter_fly_plout/module/main/container_page.dart';
+import 'package:flutter_fly_plout/module/main/main_page.dart';
 import 'package:flutter_fly_plout/utils/screen_utils.dart';
 
 ///打开APP首页
@@ -12,7 +13,7 @@ class SplashWidget extends StatefulWidget {
 }
 
 class _SplashWidgetState extends State<SplashWidget> {
-  var container = ContainerPage();
+  var container = MainPage();
 
   bool showAd = true;
 
