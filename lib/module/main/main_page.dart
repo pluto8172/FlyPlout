@@ -14,13 +14,7 @@ class MainPage extends StatefulWidget{
 }
 
 class _MainPageState extends State<MainPage>{
-
   int _selectedIndex = 0;
-  final _widgetOption = [
-    Text('Index 0 : 首页'),
-    Text('Index 1 : 课程'),
-    Text('Index 2 : 我的'),
-  ];
 
   List<Page> pages = [
     HomePage(),

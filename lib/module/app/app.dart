@@ -21,7 +21,7 @@ Widget createApp() {
   );
 
   return MaterialApp(
-    title: 'FishDemo',
+    title: '多彩',
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),

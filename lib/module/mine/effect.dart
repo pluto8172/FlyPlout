@@ -5,14 +5,25 @@ import 'state.dart';
 
 Effect<MineState> buildEffect() {
   return combineEffects(<Object, Effect<MineState>>{
+    Lifecycle.initState: _init,
     MineAction.action: _onAction,
-    MineAction.openCollection: _onAction,
+    MineAction.openCollection: _onOpenCollectionAction,
+    MineAction.openLogin: _onOpenLoginAction,
   });
+}
+
+void _init(Action action, Context<MineState> ctx) {
+  println("初始化Mine");
+  ctx.dispatch(MineActionCreator.onLoadDataAction());
 }
 
 void _onAction(Action action, Context<MineState> ctx) {
 }
 
 void _onOpenCollectionAction(Action action, Context<MineState> ctx) {
-  Navigator.of(ctx.context).pushNamed("video_page", arguments:null);
+  Navigator.of(ctx.context).pushNamed("collection_page", arguments:null);
+}
+
+void _onOpenLoginAction(Action action, Context<MineState> ctx) {
+  Navigator.of(ctx.context).pushNamed("login_page", arguments:null);
 }

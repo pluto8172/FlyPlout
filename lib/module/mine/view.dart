@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/constant/cache_key.dart';
 import 'package:flutter_fly_plout/constant/constant.dart';
+import 'package:flutter_fly_plout/module/mine/action.dart';
 import 'package:flutter_fly_plout/widgets/image/heart_img_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'state.dart';
@@ -72,12 +74,23 @@ Widget buildView(MineState state, Dispatch dispatch, ViewService viewService) {
               _divider(),
               _dataSelect(),
               _divider(),
-              _personItem('ic_me_journal.png', '我的发布'),
+              _personItem('ic_me_journal.png', '我的发布', onTab: (){
+                // 点击事件
+                dispatch(MineActionCreator.onOpenCollectionAction());
+              }),
               _personItem('ic_me_follows.png', '我的关注'),
               _personItem('ic_me_photo_album.png', '相册'),
               _personItem('ic_me_doulist.png', '豆列 / 收藏'),
               _divider(),
-              _personItem('ic_me_wallet.png', '钱包'),
+              _personItem('ic_me_wallet.png', '钱包', onTab: (){
+                //dispatch(MineActionCreator.onOpenLoginAction());
+
+                Fluttertoast.showToast(msg: "用户id：  ${state.mineResponseBeanEntity.data.id}");
+              }),
+
+              _personItem('ic_me_photo_album.png', '设置', onTab: (){
+                dispatch(MineActionCreator.onOpenLoginAction());
+              }),
             ],
           ),
         )),

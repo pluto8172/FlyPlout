@@ -3,14 +3,13 @@ import 'package:flutter_fly_plout/bean/subject_entity.dart';
 import 'package:flutter_fly_plout/constant/constant.dart';
 import 'package:flutter_fly_plout/http/API.dart';
 import 'package:flutter_fly_plout/http/mock_request.dart';
-import 'package:flutter_fly_plout/module/home/home_app_bar.dart' as myapp;
 import 'package:flutter_fly_plout/module/main/router.dart';
 import 'package:flutter_fly_plout/widgets/image/radius_img.dart';
-import 'package:flutter_fly_plout/widgets/search_text_field_widget.dart';
 import 'package:flutter_fly_plout/widgets/video_widget.dart';
 
-
 class MyHomePage extends StatelessWidget {
+  TabController _tabController;
+
   @override
   Widget build(BuildContext context) {
     print('build HomePage');
@@ -18,73 +17,68 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-
-
-///首页，TAB页面，显示动态和推荐TAB
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    print('build HomePage');
-    return getWidget();
-  }
-}
-
-var _tabs = ['动态', '推荐'];
+var _tabs = ['推荐', '电影', '电视剧', '少儿', '动漫', '纪录片', '娱乐', '游戏', '生活', '漫画'];
 
 DefaultTabController getWidget() {
+  TabController _tabController;
   return DefaultTabController(
-    initialIndex: 1,
+    initialIndex: 0,
     length: _tabs.length, // This is the number of tabs.
     child: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         // These are the slivers that show up in the "outer" scroll view.
         return <Widget>[
           SliverOverlapAbsorber(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: myapp.SliverAppBar(
-              pinned: true,
-              expandedHeight: 120.0,
-              primary: true,
-              titleSpacing: 0.0,
-              backgroundColor: Colors.white,
-              flexibleSpace: FlexibleSpaceBar(
-                collapseMode: CollapseMode.pin,
-                background: Container(
-                  color: Colors.green,
-                  child: SearchTextFieldWidget(
-                    hintText: '影视作品中你难忘的离别',
-                    margin: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    onTab: () {
-                      Router.push(context, Router.searchPage, '影视作品中你难忘的离别');
-                    },
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              child: Scaffold(
+                  appBar: AppBar(
+                    title: Text('首页'),
+                    leading: Icon(Icons.home),
+                    backgroundColor: Colors.green,
+                    bottom: TabBar(
+                      isScrollable: true,
+                      controller: _tabController,
+                      tabs: <Widget>[
+                        Tab(
+                          text: "推荐",
+                        ),
+                        Tab(
+                          text: "电影",
+                        ),
+                        Tab(
+                          text: "电视剧",
+                        ),
+                        Tab(
+                          text: "少儿",
+                        ),
+                        Tab(
+                          text: "动漫",
+                        ),
+                        Tab(
+                          text: "纪录片",
+                        ),
+                        Tab(
+                          text: "娱乐",
+                        ),
+                        Tab(
+                          text: "游戏",
+                        ),
+                        Tab(
+                          text: "生活",
+                        ),
+                        Tab(
+                          text: "漫画",
+                        ),
+                      ],
+                    ),
                   ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-              ),
-              bottomTextString: _tabs,
-              bottom: TabBar(
-                // These are the widgets to put in each tab in the tab bar.
-                tabs: _tabs
-                    .map((String name) => Container(
-                          child: Text(
-                            name,
-                          ),
-                          padding: const EdgeInsets.only(bottom: 5.0),
-                        ))
-                    .toList(),
-              ),
-            ),
-          ),
+                  body: TabBarView(children: _tabs.map((String name) {
+                    return SliverContainer(
+                      name: name,
+                    );
+                  }).toList()))),
         ];
       },
-      body: TabBarView(
-        // These are the contents of the tab views, below the tabs.
-        children: _tabs.map((String name) {
-          return SliverContainer(
-            name: name,
-          );
-        }).toList(),
-      ),
     ),
   );
 }
@@ -118,7 +112,6 @@ class _SliverContainerState extends State<SliverContainer> {
   List<Subject> list;
 
   void requestAPI() async {
-
     var _request = MockRequest();
     var result = await _request.get(API.TOP_250);
     var resultList = result['subjects'];
@@ -153,10 +146,12 @@ class _SliverContainerState extends State<SliverContainer> {
             key: PageStorageKey<String>(widget.name),
             slivers: <Widget>[
               SliverOverlapInjector(
-                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               ),
               SliverList(
-                  delegate: SliverChildBuilderDelegate(((BuildContext context, int index) {
+                  delegate: SliverChildBuilderDelegate(
+                      ((BuildContext context, int index) {
                 return getCommonItem(list, index);
               }), childCount: list.length)),
             ],
@@ -187,16 +182,19 @@ class _SliverContainerState extends State<SliverContainer> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              CircleAvatar(  // 圆形头像
+              CircleAvatar(
+                // 圆形头像
                 radius: 25.0,
                 backgroundImage: NetworkImage(item.casts[0].avatars.medium),
                 backgroundColor: Colors.white,
               ),
-              Padding( //名称
+              Padding(
+                //名称
                 padding: const EdgeInsets.only(left: 10.0),
                 child: Text(item.title),
               ),
-              Expanded(  // 更多
+              Expanded(
+                // 更多
                 child: Align(
                   child: Icon(
                     Icons.more_horiz,
@@ -217,13 +215,15 @@ class _SliverContainerState extends State<SliverContainer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Image.asset( //点赞
+                Image.asset(
+                  //点赞
                   Constant.ASSETS_IMG + 'ic_vote.png',
                   width: 25.0,
                   height: 25.0,
                 ),
                 Image.asset(
-                  Constant.ASSETS_IMG + 'ic_notification_tv_calendar_comments.png',
+                  Constant.ASSETS_IMG +
+                      'ic_notification_tv_calendar_comments.png',
                   width: 20.0,
                   height: 20.0,
                 ),
@@ -267,15 +267,16 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   getContentVideo(int index) {
-    if(!mounted){
+    if (!mounted) {
       return Container();
     }
     return VideoWidget(
-      index == 1 ? Constant.URL_MP4_DEMO_0 :  Constant.URL_MP4_DEMO_1,
+      index == 1 ? Constant.URL_MP4_DEMO_0 : Constant.URL_MP4_DEMO_1,
       showProgressBar: false,
     );
   }
 }
+
 ///动态TAB
 _loginContainer(BuildContext context) {
   return Align(
@@ -300,7 +301,8 @@ _loginContainer(BuildContext context) {
               '去登录',
               style: TextStyle(fontSize: 16.0, color: Colors.green),
             ),
-            padding: const EdgeInsets.only(left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
+            padding: const EdgeInsets.only(
+                left: 35.0, right: 35.0, top: 8.0, bottom: 8.0),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.green),
                 borderRadius: const BorderRadius.all(Radius.circular(6.0))),

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fly_plout/constant/constant.dart';
-import 'package:flutter_fly_plout/module/main/container_page.dart';
 import 'package:flutter_fly_plout/module/main/main_page.dart';
 import 'package:flutter_fly_plout/utils/screen_utils.dart';
 
