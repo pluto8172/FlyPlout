@@ -1,0 +1,1 @@
+class RString{  static const String  main_bottom_home_title = "首页";  static const String  main_bottom_discover_title = "发现";  static const String  main_bottom_member_title = "会员";  static const String  main_bottom_mine_title = "我的";}
